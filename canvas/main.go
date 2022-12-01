@@ -7,23 +7,32 @@ import (
 	"golang.org/x/image/colornames"
 )
 
+var diffX = 0.0
+
 func draw(imd *imdraw.IMDraw) {
+
+	diffX = diffX + 1.0
+
+	if diffX > 1024 {
+		diffX = -1024
+	}
+
 	imd.Color = pixel.RGB(1, 0, 0)
 	imd.EndShape = imdraw.RoundEndShape
-	imd.Push(pixel.V(200, 100))
+	imd.Push(pixel.V(200+diffX, 100))
 
 	imd.Color = pixel.RGB(0, 1, 0)
 	imd.EndShape = imdraw.RoundEndShape
-	imd.Push(pixel.V(800, 100))
+	imd.Push(pixel.V(800+diffX, 100))
 	
 	imd.Color = pixel.RGB(0, 0, 1)
 	imd.EndShape = imdraw.RoundEndShape
-	imd.Push(pixel.V(500, 700))
+	imd.Push(pixel.V(500+diffX, 700))
 
 	
 	imd.Color = pixel.RGB(1, 0, 0)
 	imd.EndShape = imdraw.RoundEndShape
-	imd.Push(pixel.V(200, 100))
+	imd.Push(pixel.V(200+diffX, 100))
 	//imd.Polygon(0)
 	imd.Line(50.0)
 	//imd.Circle(80.0,5.0)
@@ -45,7 +54,7 @@ func run() {
 	for !win.Closed() {
 		imd.Clear()
 		draw(imd)
-		
+
 		win.Clear(colornames.Black)
 		imd.Draw(win)
 		win.Update()
