@@ -23,26 +23,26 @@ func draw(imd *imdraw.IMDraw) {
 	}
 
 	// colisão com paredes
-	if posTri.x < 0 || posTri.x > 1024.0 {
+	if posTri.x < 0 || posTri.x > 1024.0-150.0 {
 		velTri.x = -velTri.x
 	}
 
 	imd.Color = pixel.RGB(1, 0, 0)
 	imd.EndShape = imdraw.RoundEndShape
-	imd.Push(pixel.V(50+posTri.x, 25+posTri.y))
+	imd.Push(pixel.V(posTri.x, 25+posTri.y))
 
 	imd.Color = pixel.RGB(0, 1, 0)
 	imd.EndShape = imdraw.RoundEndShape
-	imd.Push(pixel.V(200+posTri.x, 25+posTri.y))
+	imd.Push(pixel.V(150+posTri.x, 25+posTri.y))
 	
 	imd.Color = pixel.RGB(0, 0, 1)
 	imd.EndShape = imdraw.RoundEndShape
-	imd.Push(pixel.V(125+posTri.x, 175+posTri.y))
+	imd.Push(pixel.V(175+posTri.x, 175+posTri.y))
 
 	
 	imd.Color = pixel.RGB(1, 0, 0)
 	imd.EndShape = imdraw.RoundEndShape
-	imd.Push(pixel.V(50+posTri.x, 25+posTri.y))
+	imd.Push(pixel.V(posTri.x, 25+posTri.y))
 	//imd.Polygon(0)
 	imd.Line(50.0)
 	//imd.Circle(80.0,5.0)
