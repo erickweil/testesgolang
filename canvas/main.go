@@ -7,15 +7,25 @@ import (
 	"golang.org/x/image/colornames"
 )
 
-var posTri = Vector2{x:400.0,y:300.0} 
-var velTri = Vector2{x:0,y:0}
+var posTri = Vector2{x:100.0,y:300.0} 
+var velTri = Vector2{x:1.5,y:0}
 var aceTri = Vector2{x:0,y:-0.01}
 
 func draw(imd *imdraw.IMDraw) {
 
+	// física
 	velTri = velTri.somar(aceTri)
 	posTri = posTri.somar(velTri)
 
+	// colisão com chão
+	if posTri.y < 0 {
+		velTri.y = -velTri.y
+	}
+
+	// colisão com paredes
+	if posTri.x < 0 || posTri.x > 1024.0 {
+		velTri.x = -velTri.x
+	}
 
 	imd.Color = pixel.RGB(1, 0, 0)
 	imd.EndShape = imdraw.RoundEndShape
