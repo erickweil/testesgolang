@@ -1,0 +1,25 @@
+package main
+
+import "fmt"
+
+func main() {
+var tentativas int
+var login bool
+senha := [10]int{4758, 3598, 6010, 7893, 5482, 2470, 8369, 7854, 9235, 4672}
+fmt.Print("Informe sua senha:")
+fmt.Scan(&tentativas)
+
+for _, senhas := range senha {
+if senhas == tentativas {
+login = true
+break
+} else {
+login = false
+}
+}
+if login == true {
+fmt.Println("Bem vindo!")
+} else {
+fmt.Println("Erro.")
+}
+}

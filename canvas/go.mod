@@ -1,4 +1,4 @@
-module github.com/erickweil/testesgolang
+module example/canvas
 
 go 1.19
 
