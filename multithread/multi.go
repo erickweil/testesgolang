@@ -1,15 +1,11 @@
 package main
 
-import (
-	"example/multithread/aleatorio"
-)
-
-//import "example/multithread/raymarch"
+import "example/multithread/senha"
 
 //"example/multithread/filtro"
 //"example/multithread/senha"
 //"example/multithread/aleatorio"
 
 func main() {
-	aleatorio.Main()
+	senha.Main()
 }

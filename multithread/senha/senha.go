@@ -1,4 +1,4 @@
-package main
+package senha
 
 /*
 Código que pesquisa todas as combinações de dígitos
