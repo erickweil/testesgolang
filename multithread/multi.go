@@ -1,6 +1,8 @@
 package main
 
-import "example/multithread/tutorial"
+import (
+	"example/multithread/aleatorio"
+)
 
 //import "example/multithread/raymarch"
 
@@ -9,5 +11,5 @@ import "example/multithread/tutorial"
 //"example/multithread/aleatorio"
 
 func main() {
-	tutorial.Main3()
+	aleatorio.Main()
 }
