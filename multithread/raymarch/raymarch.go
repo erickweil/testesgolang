@@ -6,6 +6,7 @@ import (
 	"image/color"
 	"image/png"
 	"os"
+	"sync"
 	"time"
 )
 
@@ -51,39 +52,50 @@ func SalvarImagem(img image.Image, caminho string) {
 	check(err)
 }
 
+func renderizarY(x int, altura int, largurapor2 float64, alturapor2 float64, alturaf float64,img *image.RGBA) {
+	for y := 0; y < altura; y++ {
+		// remapear de pixel para fragmento
+		// está certo dividir os dois pela altura, é para ficar correto o aspecto
+		// e subtrai da altura por 2 porque precisa que o {0.0,0.0} seja o centro
+		xf := ((float64(x) - largurapor2) / alturaf) 
+		yf := ((float64(y) - alturapor2) / alturaf)
+
+		// chama a função do renderizador
+		var cor V3 = renderizarPixel(xf,yf)
+
+		// converte de float 0.0-1.0 para byte 0-255
+		var novoPixel = color.RGBA{
+			uint8(cor.X*255.0),
+			uint8(cor.Y*255.0),
+			uint8(cor.Z*255.0),
+			uint8(255), // sem transparência
+		}
+
+		// salvando o pixel alterado na nova imagem
+		img.Set(x,y,novoPixel)
+	}
+	//wg.Done()
+}
+
 func renderizar(largura int, altura int) image.Image {
 	var img *image.RGBA = image.NewRGBA(image.Rect(0,0,largura,altura))
 	
 	var alturaf = float64(altura)
 	var alturapor2 = alturaf/2.0
 	var largurapor2 = float64(largura)/2.0
+
 	// PARA CADA LINHA DA IMAGEM
 	for x := 0; x < largura; x++ {
 		// PARA CADA CÉLULA NESTA LINHA
-		for y := 0; y < altura; y++ {
-			// remapear de pixel para fragmento
-			// está certo dividir os dois pela altura, é para ficar correto o aspecto
-			// e subtrai da altura por 2 porque precisa que o {0.0,0.0} seja o centro
-			xf := ((float64(x) - largurapor2) / alturaf) 
-			yf := ((float64(y) - alturapor2) / alturaf)
-
-			// chama a função do renderizador
-			var cor V3 = renderizarPixel(xf,yf)
-
-			// converte de float 0.0-1.0 para byte 0-255
-			var novoPixel = color.RGBA{
-				uint8(cor.X*255.0),
-				uint8(cor.Y*255.0),
-				uint8(cor.Z*255.0),
-				uint8(255), // sem transparência
-			}
-
-			// salvando o pixel alterado na nova imagem
-			img.Set(x,y,novoPixel)
-		}
+		//wg.Add(1)
+		renderizarY(x,altura,largurapor2,alturapor2,alturaf,img)
 	}
+	//wg.Wait()
+
 	return img
 }
+
+var wg sync.WaitGroup
 
 func Main() {
 	main()
