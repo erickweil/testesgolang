@@ -24,6 +24,13 @@ func (lista *ListaEncadeada) Add(v int) {
 }
 
 func (lista *ListaEncadeada) getno(indice int) *No {
+	var no = lista.inicio
+	for i := 0; no != nil; i++ {
+		if i == indice {
+			return no
+		}
+		no = no.proximo
+	}
 	return nil
 }
 
@@ -36,8 +43,12 @@ func Main() {
 	var lista = ListaEncadeada{}
 	lista.Add(10)
 	lista.Add(20)
+	lista.Add(30)
+	lista.Add(40)
 
 	fmt.Println(lista)
 	fmt.Println("Inicio:",lista.inicio)
 	fmt.Println("Fim:",lista.fim)
+
+	fmt.Println("posição 2:",lista.Get(2))
 }
