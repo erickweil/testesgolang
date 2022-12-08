@@ -1,9 +1,9 @@
 package main
 
 import (
-	"example/estruturas/fila"
+	"example/estruturas/tabelahash"
 )
 
 func main() {
-	fila.Main()
+	tabelahash.Main()
 }
