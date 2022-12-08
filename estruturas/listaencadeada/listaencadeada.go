@@ -47,6 +47,9 @@ func (lista *ListaEncadeada) Remove(indice int) {
 
 	if indice == 0 { // Se é o primeiro
 		lista.inicio = lista.inicio.proximo
+		if lista.inicio == nil {
+			lista.fim = nil
+		}
 	} else { // Se não é o primeiro
 		var no = lista.getno(indice-1)
 		if no == nil || no.proximo == nil {
@@ -54,6 +57,10 @@ func (lista *ListaEncadeada) Remove(indice int) {
 		}
 
 		no.proximo = no.proximo.proximo
+
+		if no.proximo == nil {
+			lista.fim = nil
+		}
 	}
 
 
@@ -72,5 +79,8 @@ func Main() {
 	fmt.Println("Inicio:",lista.inicio)
 	fmt.Println("Fim:",lista.fim)
 
-	fmt.Println("posição 2:",lista.Get(2))
+	fmt.Println("posição 0:",lista.Get(0))
+
+	lista.Remove(0)
+	fmt.Println("posição 0 depois do remove:",lista.Get(0))
 }

@@ -1,7 +1,7 @@
 package main
 
-import "example/estruturas/listaencadeada"
+import "example/estruturas/pilha"
 
 func main() {
-	listaencadeada.Main()
+	pilha.Main()
 }
