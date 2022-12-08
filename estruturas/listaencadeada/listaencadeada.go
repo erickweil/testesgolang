@@ -39,6 +39,28 @@ func (lista *ListaEncadeada) Get(indice int) int {
 	return lista.getno(indice).valor
 }
 
+
+func (lista *ListaEncadeada) Remove(indice int) {
+	if lista.inicio == nil {
+		panic("LISTA VAZIA")
+	}
+
+	if indice == 0 { // Se é o primeiro
+		lista.inicio = lista.inicio.proximo
+	} else { // Se não é o primeiro
+		var no = lista.getno(indice-1)
+		if no == nil || no.proximo == nil {
+			panic("INDICE NÃO EXISTE NESTA LISTA")
+		}
+
+		no.proximo = no.proximo.proximo
+	}
+
+
+}
+
+
+
 func Main() {
 	var lista = ListaEncadeada{}
 	lista.Add(10)
