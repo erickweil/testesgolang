@@ -1,7 +1,9 @@
 package main
 
-import "example/estruturas/pilha"
+import (
+	"example/estruturas/fila"
+)
 
 func main() {
-	pilha.Main()
+	fila.Main()
 }
